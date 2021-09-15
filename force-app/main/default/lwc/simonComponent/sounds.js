@@ -3,24 +3,31 @@
 
 /*
  * TO USE!!!!!
- * include below import in file. Make sure sounds.js is in the same directory as the component.
+ * INCLUDE below import in file. Make sure sounds.js is in the same directory as the component.
  * import { redSound, greenSound, blueSound, yellowSound } from './sounds.js';
  * 
  * Can utilize functions after import ex:
  * yellowSound();
+ * 
+ * When you upload mp3 files as Static Resources,
+ * the names must be as follows: 
+ * red
+ * blue
+ * green
+ * yellow
 */
 
 //-----------------------------------------
 
-import synth1 from '@salesforce/resourceUrl/synth1';
+//import synth1 from '@salesforce/resourceUrl/synth1';
 import red from '@salesforce/resourceUrl/red';
 import blue from '@salesforce/resourceUrl/blue';
 import green from '@salesforce/resourceUrl/green';
 import yellow from '@salesforce/resourceUrl/yellow';
 
 function beep(){
-    var beepsound = new Audio(synth1);
-    beepsound.play();
+    //var beepsound = new Audio(synth1);
+    //beepsound.play();
     console.log('beep ');
 }
 
@@ -44,4 +51,4 @@ function greenSound(){
     beepsound.play();
 }
 
-export{ beep, redSound, blueSound, yellowSound, greenSound }
+export{ redSound, blueSound, yellowSound, greenSound }
