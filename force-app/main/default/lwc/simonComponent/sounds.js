@@ -2,19 +2,26 @@
 //import functions in a file that you wish to use them in
 
 /*
- * TO USE!!!!!
- * INCLUDE below import in file. Make sure sounds.js is in the same directory as the component.
- * import { redSound, greenSound, blueSound, yellowSound } from './sounds.js';
- * 
- * Can utilize functions after import ex:
- * yellowSound();
- * 
- * When you upload mp3 files as Static Resources,
+ * INSTRUCTIONS------------------!!!
+ *
+ * Step1: Upload all mp3 files as Static Resources.
  * the names must be as follows: 
  * red
  * blue
  * green
  * yellow
+ * 
+ * Step2: Include below import in file.
+ * Make sure sounds.js is in the same directory as the component.
+ * 
+ * //include me!!!
+ * import { redSound, greenSound, blueSound, yellowSound } from './sounds.js';
+ * 
+ * Step3: Can utilize functions after import ex:
+ * 
+ * yellowSound();
+ * console.log('playing blue');
+ * blueSound();
 */
 
 //-----------------------------------------
