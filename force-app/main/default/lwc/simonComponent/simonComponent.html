@@ -22,6 +22,23 @@
             <div id="yellow" class="yellowQuad" onclick={quadClickHandler}></div>
             <div id="blue" class="blueQuad" onclick={quadClickHandler}></div>
         </div>
-    </div>  
+    </div>
+    
+    <!-- BEGIN MODAL-->
+    <template if:true={lost}>
+        <section role="dialog" tabindex="-1" aria-label="Meaningful description of the modal content" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <h1>YOU LOSE</h1>
+                <p>You made it to round {round}</p> 
+            </div>
+            <footer class="slds-modal__footer">
+                <button class="slds-button slds-button_neutral" onclick={closeModal}>OK</button>
+            </footer>
+            </div>
+        </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <!-- END MODAL-->
 
 </template>
