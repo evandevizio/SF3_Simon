@@ -1,4 +1,4 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, track } from 'lwc';
 import { redSound, greenSound, blueSound, yellowSound } from './sounds.js';
 
 export default class SimonComponent extends LightningElement {
@@ -9,15 +9,13 @@ export default class SimonComponent extends LightningElement {
     round = 0;
     sequence = 0;
     disable = true;
+    @track buttonDisable = false;
 
     onePlayerGame() {
-        this.list = [];
         this.sequence = 0;
         this.round++;
         console.log(this.round);
-        for (let i = 0; i < this.round; i++) {
-            this.list.push(this.nextInSequence());
-        }
+        this.list.push(this.nextInSequence());
         this.playSequence();
     }
 
@@ -55,11 +53,13 @@ export default class SimonComponent extends LightningElement {
                 this.template.querySelector('.redQuad').classList.remove('brightRedQuad');
                 this.template.querySelector('.yellowQuad').classList.remove('brightYellowQuad');
                 this.template.querySelector('.blueQuad').classList.remove('brightBlueQuad');
+                
+                if(i === this.list.length - 1){
+                    this.disable = false;
+                }
+
             }, ((i + 1) * 500));
         }
-        setTimeout(() => {
-            this.disable = false;
-        }, (this.list.length * 500));
     }
 
     nextInSequence() {
@@ -111,14 +111,17 @@ export default class SimonComponent extends LightningElement {
                     }, 1200);
                 }
             } else {
-                this.round = 0;
                 console.log('You lose');
                 this.disable = true;
+                this.buttonDisable = false;
             }
         }
     }
 
     playBtnClickHandler() {
+        this.round = 0;
+        this.list = [];
+        this.buttonDisable = true;
         this.onePlayerGame();
     }
 }
