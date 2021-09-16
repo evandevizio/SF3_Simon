@@ -80,3 +80,19 @@ body {
 .blueQuad:hover {
     background-color: #079BF5;
 }
+
+.brightRedQuad {
+    background-color: red;
+}
+
+.brightGreenQuad {
+    background-color: lightgreen;
+}
+
+.brightYellowQuad {
+    background-color: yellow;
+}
+
+.brightBlueQuad {
+    background-color: #079BF5;
+}
