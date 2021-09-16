@@ -3,73 +3,122 @@ import { redSound, greenSound, blueSound, yellowSound } from './sounds.js';
 
 export default class SimonComponent extends LightningElement {
 
-    turnCount; // keeps track of the current turn number
-    randomList = []; // random sequence generated for the round
+    //turnCount; // keeps track of the current turn number
+    //randomList = []; // random sequence generated for the round
+    list = [];
+    round = 0;
+    sequence = 0;
+    disable = true;
 
-    connectedCallback(){
-        for(let i = 0; i < 10; i++){
-            // create a random sequence of ints, size 10, choices 0-3.
-            // 0: green, 1: red, 2: yellow, 3: blue
-            this.randomList.push(this.getRandomInt(4));
+    onePlayerGame() {
+        this.list = [];
+        this.sequence = 0;
+        this.round++;
+        console.log(this.round);
+        for (let i = 0; i < this.round; i++) {
+            this.list.push(this.nextInSequence());
         }
-        console.log('the sequence is: ' + this.randomList);
-        this.turnCount = 1;
-    }
-
-    playSequence(){
-        // play back the random sequence up to the current turn number
-        this.randomList.forEach(function(i){
-            switch(i){
-                case 0:
-                    greenSound();
-                    document.querySelector(".greenQuad").style.backgroundColor = "#00FF00";
-                    break;
-                case 1:
-                    redSound();
-                    document.querySelector(".redQuad").style.backgroundColor = "#FF0000";
-                    break;
-                case 2:
-                    yellowSound();
-                    document.querySelector(".yellowQuad").style.backgroundColor = "#FFFF00";
-                    break;
-                case 3:
-                    blueSound();
-                    document.querySelector(".blueQuad").style.backgroundColor = "#0000FF";
-                    break;
-            }
-        })
-        setTimeout(function(){
-            console.log('turn is over.');
-            this.turnCount++;
-        }, 500);
-    }
-
-    quadClickHandler(event){
-        let buttonClass = event.target.className;
-
-        switch(buttonClass){
-            case 'redQuad':
-                redSound();
-                break;
-            case 'blueQuad':
-                blueSound();
-                break;
-            case 'greenQuad':
-                greenSound();
-                break;
-            case 'yellowQuad':
-                yellowSound();
-                break;
-        }
-        console.log("clicked " + buttonClass);
-    }
-
-    playBtnClickHandler(){
         this.playSequence();
     }
 
-    getRandomInt(max) {
-        return Math.floor(Math.random() * max);
+    playSequence() {
+        for (let i = 0; i < this.list.length; i++) {
+            setTimeout(() => {
+                switch (this.list[i]) {
+                    case 'green':
+                        console.log('switch case: green');
+                        greenSound();
+                        this.template.querySelector('.greenQuad').classList.add("brightGreenQuad");
+                        break;
+                    case 'red':
+                        console.log('switch case: red');
+                        redSound();
+                        this.template.querySelector('.redQuad').classList.add('brightRedQuad');
+                        break;
+                    case 'yellow':
+                        console.log('switch case: yellow');
+                        yellowSound();
+                        this.template.querySelector('.yellowQuad').classList.add('brightYellowQuad');
+                        break;
+                    case 'blue':
+                        console.log('switch case: blue');
+                        blueSound();
+                        this.template.querySelector('.blueQuad').classList.add('brightBlueQuad');
+                        break;
+                    default:
+                        console.log('this wasn\'t supposed to happen');
+                }
+            }, ((i) * 500));
+            setTimeout(() => {
+                // reset colors
+                this.template.querySelector('.greenQuad').classList.remove('brightGreenQuad');
+                this.template.querySelector('.redQuad').classList.remove('brightRedQuad');
+                this.template.querySelector('.yellowQuad').classList.remove('brightYellowQuad');
+                this.template.querySelector('.blueQuad').classList.remove('brightBlueQuad');
+            }, ((i + 1) * 500));
+        }
+        setTimeout(() => {
+            this.disable = false;
+        }, (this.list.length * 500));
     }
 
+    nextInSequence() {
+        var color = Math.floor(Math.random() * 4);
+        if (color == 0) {
+            return 'red';
+        }
+        if (color == 1) {
+            return 'green';
+        }
+        if (color == 2) {
+            return 'blue';
+        }
+        if (color == 3) {
+            return 'yellow';
+        }
+    }
+
+    quadClickHandler(event) {
+        if (!this.disable) {
+            let buttonClass = event.target.classList;
+            console.log(buttonClass);
+            let correct = false;
+
+            if (buttonClass.contains('redQuad')) {
+                redSound();
+                correct = this.list[this.sequence] === 'red';
+
+            } else if (buttonClass.contains('blueQuad')) {
+                blueSound();
+                correct = this.list[this.sequence] === 'blue';
+            } else if (buttonClass.contains('greenQuad')) {
+                greenSound();
+                correct = this.list[this.sequence] === 'green';
+            } else if (buttonClass.contains('yellowQuad')) {
+                yellowSound();
+                correct = this.list[this.sequence] === 'yellow';
+            }
+
+            if (correct) {
+                this.sequence++;
+                console.log('Correct');
+                if (this.sequence >= this.list.length) {
+                    console.log('You Win!');
+                    this.disable = true;
+                    setTimeout(() => {
+                        //ready game
+                        this.onePlayerGame();
+                    }, 1200);
+                }
+            } else {
+                this.round = 0;
+                console.log('You lose');
+                this.disable = true;
+            }
+        }
+    }
+
+    playBtnClickHandler() {
+        this.onePlayerGame();
+    }
 }
