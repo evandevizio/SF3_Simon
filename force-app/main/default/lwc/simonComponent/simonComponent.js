@@ -1,15 +1,14 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement } from 'lwc';
 import { redSound, greenSound, blueSound, yellowSound } from './sounds.js';
 
 export default class SimonComponent extends LightningElement {
 
-    //turnCount; // keeps track of the current turn number
-    //randomList = []; // random sequence generated for the round
     list = [];
     round = 0;
     sequence = 0;
-    disable = true;
-    @track buttonDisable = false;
+    disable = true; // disable the Simon buttons
+    lost = false;   // true if the player lost the game
+    buttonDisable = false; // disable the play button
 
     onePlayerGame() {
         this.sequence = 0;
@@ -112,6 +111,7 @@ export default class SimonComponent extends LightningElement {
                 }
             } else {
                 console.log('You lose');
+                this.lost = true;
                 this.disable = true;
                 this.buttonDisable = false;
             }
@@ -119,9 +119,14 @@ export default class SimonComponent extends LightningElement {
     }
 
     playBtnClickHandler() {
+        this.lost = false;
         this.round = 0;
         this.list = [];
         this.buttonDisable = true;
         this.onePlayerGame();
+    }
+
+    closeModal(){
+        this.lost = false;
     }
 }
