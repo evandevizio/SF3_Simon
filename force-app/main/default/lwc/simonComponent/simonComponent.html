@@ -1,5 +1,26 @@
 <template>
 
-    
-    
+    <h1>SIMON</h1> <br/>
+
+    <div style="align-content: center;text-align: center;">
+        <lightning-button 
+            variant="brand" 
+            label="PLAY" 
+            onclick={playBtnClickHandler} 
+            class="slds-m-left_x-small">
+        </lightning-button>
+    </div>
+
+    <div class="game-board">
+        <div class="top">
+            <div id="green" class="greenQuad" onclick={quadClickHandler}></div>
+            <div id="red" class="redQuad" onclick={quadClickHandler}></div>
+        </div>
+
+        <div class="bottom">
+            <div id="yellow" class="yellowQuad" onclick={quadClickHandler}></div>
+            <div id="blue" class="blueQuad" onclick={quadClickHandler}></div>
+        </div>
+    </div>  
+
 </template>

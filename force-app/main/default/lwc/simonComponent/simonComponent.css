@@ -1,0 +1,98 @@
+h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    align-content: center;
+    text-align: center;
+}
+
+body {
+    background-color: #222;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    align-content: center;
+  }
+  
+.game-board {
+    text-align: center;
+    margin-top: 30px;
+    min-height: 600px;
+    min-width: 600px;
+    font-size: 0;
+}
+  
+.greenQuad {
+    background-color: green;
+    border-top-left-radius: 100%;
+    border-width: 5px 3px 3px 5px;
+    border-style: solid;
+    border-color: #000;
+    display: inline-block;
+    height: 300px;
+    width: 300px;
+}
+
+.redQuad {
+    background-color: darkred;
+    border-top-right-radius: 100%;
+    border-width: 5px 5px 3px 3px;
+    border-style: solid;
+    border-color: #000;
+    display: inline-block;
+    height: 300px;
+    width: 300px;
+}
+  
+.yellowQuad {
+    background-color: #BBBB00;
+    border-bottom-left-radius: 100%;
+    border-width: 3px 3px 5px 5px;
+    border-style: solid;
+    border-color: #000;
+    display: inline-block;
+    height: 300px;
+    width: 300px;
+}
+  
+.blueQuad {
+    background-color: #0000CC;
+    border-bottom-right-radius: 100%;
+    border-width: 3px 5px 5px 3px;
+    border-style: solid;
+    border-color: #000;
+    display: inline-block;
+    height: 300px;
+    width: 300px;
+}
+
+.redQuad:hover {
+    background-color: red;
+}
+
+.greenQuad:hover {
+    background-color: lightgreen;
+}
+
+.yellowQuad:hover {
+    background-color: yellow;
+}
+
+.blueQuad:hover {
+    background-color: #079BF5;
+}
+
+.brightRedQuad {
+    background-color: red;
+}
+
+.brightGreenQuad {
+    background-color: lightgreen;
+}
+
+.brightYellowQuad {
+    background-color: yellow;
+}
+
+.brightBlueQuad {
+    background-color: #079BF5;
+}
